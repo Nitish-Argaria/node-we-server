@@ -3,6 +3,7 @@ const hbs = require('hbs');
 const fs = require('fs');
 var app = express();
 
+const port = process.env.PORT || 3000;
 hbs.registerPartials(__dirname + '/views/partials')
 app.set('view engine','hbs');
 
@@ -23,9 +24,9 @@ fs.appendFile('Server.log',log+'\n',(err)=>{
 });
 //End of logging middleware
 
-app.use((req,res,next) =>{
-	res.render('maintenance.hbs');
-})
+// app.use((req,res,next) =>{
+// 	res.render('maintenance.hbs');
+// })
 
 app.use(express.static(__dirname+ '/public'));
 
@@ -57,8 +58,8 @@ app.get('/bad',(req,res) => {
 	});
 });
 
-app.listen(3000,()=>{
-	console.log('Server is up and running on port 3000');
+app.listen(port,()=>{
+	console.log(`Server is up and running on port ${port}`);
 });
 
 //app.listen can take two argumnet first port number and 2nd is the 
